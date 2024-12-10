@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroEstudiantes.AppMovil", "RegistroEstudiantes.AppMovil\RegistroEstudiantes.AppMovil.csproj", "{E35A62A4-9A97-491F-8D58-1D896673F5A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistroEstudiantes.Modelos", "RegistroEstudiantes.Modelos\RegistroEstudiantes.Modelos.csproj", "{EE512337-7CFA-41C0-928A-51F8E6C15EAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E35A62A4-9A97-491F-8D58-1D896673F5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35A62A4-9A97-491F-8D58-1D896673F5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E35A62A4-9A97-491F-8D58-1D896673F5A7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{E35A62A4-9A97-491F-8D58-1D896673F5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E35A62A4-9A97-491F-8D58-1D896673F5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E35A62A4-9A97-491F-8D58-1D896673F5A7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{EE512337-7CFA-41C0-928A-51F8E6C15EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE512337-7CFA-41C0-928A-51F8E6C15EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE512337-7CFA-41C0-928A-51F8E6C15EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE512337-7CFA-41C0-928A-51F8E6C15EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
