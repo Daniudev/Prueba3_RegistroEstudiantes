@@ -1,8 +1,8 @@
 ﻿using Firebase.Database;
 using Firebase.Database.Query;
-using RegistroEstudiantes.Modelos.Modelos;
-using RegistroEstudiantes.Modelos.Helpers;
 using Microsoft.Extensions.Logging;
+using RegistroEstudiantes.Modelos.Helpers;
+using RegistroEstudiantes.Modelos.Modelos;
 
 namespace RegistroEstudiantes.AppMovil
 {
@@ -20,33 +20,66 @@ namespace RegistroEstudiantes.AppMovil
                 });
 
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
+
 #endif
-            RegistrarEstudiante();
+            ActualizarCursos();
+            ActualizarEstudiantes();
             return builder.Build();
         }
 
-        public static void RegistrarEstudiante()
+        public static async Task ActualizarCursos()
         {
             FirebaseClient client = new FirebaseClient(FireBaseConfig.DatabaseUrl);
 
-            var cursos = client.Child("Cursos").OnceAsync<Curso>();
+            var cursos = await client.Child("Cursos").OnceAsync<Curso>();
 
-            if (cursos.Result.Count == 0)
+            if (cursos.Count == 0)
             {
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Primero Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Segundo Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Tercero Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Cuarto Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Quinto Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Sexto Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Septimo Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Octavo Basico" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Primero Medio" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Segundo Medio" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Tercero Medio" });
-                client.Child("Cursos").PostAsync(new Curso { Nombre = "Cuarto Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Primero Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Segundo Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Tercero Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Cuarto Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Quinto Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Sexto Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Septimo Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Octavo Basico" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Primero Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Segundo Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Tercero Medio" });
+                await client.Child("Cursos").PostAsync(new Curso { Nombre = "Cuarto Medio" });
             }
+            else
+            {
+                foreach (var curso in cursos)
+                {
+                    if (curso.Object.Estado == null)
+                    {
+                        var cursoActualizado = curso.Object;
+                        cursoActualizado.Estado = true;
+
+                        await client.Child("Cursos").Child(curso.Key).PutAsync(cursoActualizado);
+                    }
+                }
+            }
+        }
+
+        public static async Task ActualizarEstudiantes()
+        {
+            FirebaseClient client = new FirebaseClient(FireBaseConfig.DatabaseUrl);
+
+            var estudiantes = await client.Child("Estudiantes").OnceAsync<Estudiante>();
+            foreach (var estudiante in estudiantes)
+            {
+                if (estudiante.Object.Estado == null)
+                {
+                    var estudianteActualizado = estudiante.Object;
+                    estudianteActualizado.Estado = true;
+
+                    await client.Child("Estudiantes").Child(estudiante.Key).PutAsync(estudianteActualizado);
+                }
+            }
+
         }
     }
 }
