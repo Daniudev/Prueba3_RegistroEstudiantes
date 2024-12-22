@@ -34,7 +34,8 @@ public partial class CrearEstudiante : ContentPage
             SApellido = segundoApellidoEntry.Text,
             Edad = int.Parse(edadEntry.Text),
             CElectronico = correoEntry.Text,
-            Curso = curso
+            Curso = curso,
+            Estado = true
         };
 
         try
@@ -45,6 +46,7 @@ public partial class CrearEstudiante : ContentPage
 
             await Navigation.PopAsync();
 
+            
         }
         catch (Exception ex) 
         {

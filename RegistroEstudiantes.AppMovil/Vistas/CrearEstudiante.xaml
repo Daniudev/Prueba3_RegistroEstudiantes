@@ -22,7 +22,8 @@
                 Keyboard="Numeric"/>
         <Entry Placeholder="Correo Electrónico"
                 x:Name="correoEntry"/>
-                
+       
+
         <!--Boton de registro de estudiante-->
         <Button Text="Guardar Estudiante"
                 x:Name="guardarBtn"

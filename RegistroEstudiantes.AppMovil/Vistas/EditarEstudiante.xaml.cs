@@ -101,6 +101,7 @@ public partial class EditarEstudiante : ContentPage
             estudianteActualizado.Edad = edad;
             estudianteActualizado.CElectronico = EditCorreoEntry.Text.Trim();
             estudianteActualizado.Curso = new Curso { Nombre = EditCursoPicker.SelectedItem.ToString() };
+            estudianteActualizado.Estado = estadoSwitch.IsToggled;
 
             await client.Child("Estudiantes").Child(estudianteActualizado.Id).PutAsync(estudianteActualizado);
 
@@ -108,9 +109,9 @@ public partial class EditarEstudiante : ContentPage
             await Navigation.PopAsync();
 
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            await DisplayAlert("Error", ex.Message, "Ok");
+            throw;
         }
     }
 }

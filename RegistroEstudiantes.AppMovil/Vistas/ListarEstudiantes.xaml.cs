@@ -15,15 +15,25 @@ public partial class ListarEstudiantes : ContentPage
 	{
 		InitializeComponent();
 		BindingContext = this;
-		CargarLista();
+		
 	}
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        CargarLista();
+    }
 
     private async void CargarLista()
     {
         Lista.Clear();
         var estudiantes = await client.Child("Estudiantes").OnceAsync<Estudiante>();
 
-        var estudiantesActivos = estudiantes.Where(e => e.Object.Estado == true).ToList();
+        var estudiantesActivos = estudiantes
+            .Where(e => e.Object.Estado == true)
+            .GroupBy(e => e.Key)
+            .Select(g => g.First())
+            .ToList();
 
         foreach (var estudiante in estudiantesActivos)
         {
@@ -82,7 +92,7 @@ public partial class ListarEstudiantes : ContentPage
 
         if(estudiante == null)
         {
-            await DisplayAlert("Erroe", "No se pudo obtener la informacion del estudiante", "OK");
+            await DisplayAlert("Error", "No se pudo obtener la informacion del estudiante", "OK");
             return;
         }
 
